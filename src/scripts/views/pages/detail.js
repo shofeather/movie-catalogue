@@ -1,34 +1,35 @@
 import UrlParser from '../../routes/url-parser';
-import TheMovieDbSource from '../../data/themoviedb-source';
-import { createMovieDetailTemplate } from '../templates/template-creator';
-import LikeButtonInitiator from '../../utils/like-button-initiator';
- 
- 
-const Detail = {
-  async render() {
+import RestaurantSource from '../../data/jamfood-source';
+import FavoriteButtonInitiator from '../../utils/favorite-button';
+import '../../component/detail-jamfood';
+
+class Detail {
+  static async render() {
     return `
-      <div id="movie" class="movie"></div>
-      <div id="likeButtonContainer"></div>
+        <article id="content">
+            <h2 class="-label">Info Selengkapnya</h2>
+            <detail-jamfood></detail-jamfood>
+            <div id="favoriteButton"></div>
+        </article>
     `;
-  },
- 
-  async afterRender() {
+  }
+
+  static async afterRender() {
     const url = UrlParser.parseActiveUrlWithoutCombiner();
-    const movie = await TheMovieDbSource.detailMovie(url.id);
-    const movieContainer = document.querySelector('#movie');
-    movieContainer.innerHTML = createMovieDetailTemplate(movie);
- 
-    LikeButtonInitiator.init({
-      likeButtonContainer: document.querySelector('#likeButtonContainer'),
-      movie: {
-        id: movie.id,
-        title: movie.title,
-        overview: movie.overview,
-        backdrop_path: movie.backdrop_path,
-        vote_average: movie.vote_average,
-      },
-    });
-  },
-};
- 
+    const restaurantsContainer = document.querySelector('detail-jamfood');
+
+    try {
+      const restaurant = await RestaurantSource.getRestaurantDetail(url.id);
+      restaurantsContainer.ItemJamfood = restaurant;
+
+      await FavoriteButtonInitiator.init({
+        favoriteButton: document.querySelector('#favoriteButton'),
+        restaurant: restaurant.restaurant,
+      });
+    } catch (message) {
+      restaurantsContainer.renderError(message);
+    }
+  }
+}
+
 export default Detail;
