@@ -1,6 +1,6 @@
 import API_ENDPOINT from './api-endpoint';
 
-class RestaurantSource {
+class JamfoodSource {
   static async getRestaurantItem() {
     const response = await fetch(API_ENDPOINT.JAMFOOD_ITEM);
     const responseJson = await response.json();
@@ -13,4 +13,4 @@ class RestaurantSource {
   }
 }
 
-export default RestaurantSource;
+export default JamfoodSource;

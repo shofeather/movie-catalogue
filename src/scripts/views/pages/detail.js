@@ -1,5 +1,5 @@
 import UrlParser from '../../routes/url-parser';
-import RestaurantSource from '../../data/jamfood-source';
+import JamfoodSource from '../../data/jamfood-source';
 import FavoriteButtonInitiator from '../../utils/favorite-button';
 import '../../component/detail-jamfood';
 
@@ -16,18 +16,18 @@ class Detail {
 
   static async afterRender() {
     const url = UrlParser.parseActiveUrlWithoutCombiner();
-    const restaurantsContainer = document.querySelector('detail-jamfood');
+    const jamfoodContainer = document.querySelector('detail-jamfood');
 
     try {
-      const restaurant = await RestaurantSource.getRestaurantDetail(url.id);
-      restaurantsContainer.ItemJamfood = restaurant;
+      const restaurant = await JamfoodSource.getRestaurantDetail(url.id);
+      jamfoodContainer.ItemJamfood = restaurant;
 
       await FavoriteButtonInitiator.init({
         favoriteButton: document.querySelector('#favoriteButton'),
         restaurant: restaurant.restaurant,
       });
     } catch (message) {
-      restaurantsContainer.renderError(message);
+      jamfoodContainer.renderError(message);
     }
   }
 }

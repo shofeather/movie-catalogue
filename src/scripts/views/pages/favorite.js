@@ -4,8 +4,8 @@ import '../../component/list-jamfood';
 class Favorite {
   static async render() {
     return `<article id="content">
-                <h2 class="-label">Your Favorite Restaurant</h2>
-                <h2 class="noFavoriteData">You have no favorite restaurants yet</h2>
+                <h2 class="-label">Restoran Favorit Anda</h2>
+                <h2 class="noFavoriteData">Anda Belum Menambahkan Data Pada Favorit</h2>
                 <list-jamfood></list-jamfood>
             </article>
             `;

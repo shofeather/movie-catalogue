@@ -5,6 +5,7 @@ const CONFIG = {
   DATABASE_NAME: 'mini_resto-db',
   DATABASE_VERSION: 1,
   OBJECT_STORE_NAME: 'restaurant',
+  CACHE_NAME: new Date().toISOString(),
 };
 
 export default CONFIG;

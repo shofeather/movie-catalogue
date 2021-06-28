@@ -1,4 +1,4 @@
-import RestaurantSource from '../../data/jamfood-source';
+import JamfoodSource from '../../data/jamfood-source';
 import '../../component/list-jamfood';
 
 class HomeMenu {
@@ -19,11 +19,11 @@ class HomeMenu {
 
   static async afterRender() {
     const restaurants = document.querySelector('#content');
-    const restaurantsContainer = document.querySelector('list-jamfood');
+    const jamfoodContainer = document.querySelector('list-jamfood');
 
     try {
-      const response = await RestaurantSource.getRestaurantItem();
-      restaurantsContainer.restaurant = response;
+      const response = await JamfoodSource.getRestaurantItem();
+      jamfoodContainer.restaurant = response;
     } catch (message) {
       restaurants.innerHTML = '<h2>Loading Data Failed! Please Check Your Connection</h2>';
     }
