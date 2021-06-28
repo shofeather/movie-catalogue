@@ -16,8 +16,8 @@ body {
    position: absolute;
    left: 0;
    top: -40px;
-   background-color: darkblue;
-   color: white;
+   background-color: #83be41  ;
+   color: black;
    text-decoration: none;
    padding: 8px;
    z-index: 100;
